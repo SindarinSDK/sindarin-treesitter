@@ -1,0 +1,130 @@
+================================================================================
+Native function declaration
+================================================================================
+
+native fn sin(x: double): double
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (native_function_declaration
+    name: (identifier)
+    parameters: (parameter_list
+      (parameter
+        name: (identifier)
+        type: (type
+          (primitive_type))))
+    return_type: (type
+      (primitive_type))))
+
+================================================================================
+Function declaration with body
+================================================================================
+
+fn pi(): double =>
+    return 3.14
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    return_type: (type
+      (primitive_type))
+    body: (block
+      (return_statement
+        value: (primary_expression
+          (number))))))
+
+================================================================================
+Struct declaration
+================================================================================
+
+struct Point =>
+    x: double
+    y: double
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (struct_declaration
+    name: (type_identifier)
+    body: (struct_body
+      (field_declaration
+        name: (identifier)
+        type: (type
+          (primitive_type)))
+      (field_declaration
+        name: (identifier)
+        type: (type
+          (primitive_type))))))
+
+================================================================================
+Import statement
+================================================================================
+
+import "sdk/core/math" as math
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (import_statement
+    path: (string)
+    alias: (identifier)))
+
+================================================================================
+Import statement without alias
+================================================================================
+
+import "sdk/core/math"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (import_statement
+    path: (string)))
+
+================================================================================
+Decorator with native function
+================================================================================
+
+@alias "sinf"
+native fn sinF(x: float): float
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (native_function_declaration
+    (decorator
+      name: (string))
+    name: (identifier)
+    parameters: (parameter_list
+      (parameter
+        name: (identifier)
+        type: (type
+          (primitive_type))))
+    return_type: (type
+      (primitive_type))))
+
+================================================================================
+Include decorator
+================================================================================
+
+@include <math.h>
+native fn sqrt(x: double): double
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (native_function_declaration
+    (decorator
+      path: (angle_string))
+    name: (identifier)
+    parameters: (parameter_list
+      (parameter
+        name: (identifier)
+        type: (type
+          (primitive_type))))
+    return_type: (type
+      (primitive_type))))

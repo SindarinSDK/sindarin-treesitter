@@ -1,0 +1,125 @@
+================================================================================
+If statement simple
+================================================================================
+
+fn test(): int =>
+    if x > 0 =>
+        return 1
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    return_type: (type
+      (primitive_type))
+    body: (block
+      (if_statement
+        condition: (binary_expression
+          left: (primary_expression
+            (identifier))
+          right: (primary_expression
+            (number)))
+        consequence: (block
+          (return_statement
+            value: (primary_expression
+              (number))))))))
+
+================================================================================
+Variable declaration
+================================================================================
+
+fn test(): void =>
+    var x: int = 42
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    return_type: (type
+      (primitive_type))
+    body: (block
+      (variable_declaration
+        name: (identifier)
+        type: (type
+          (primitive_type))
+        value: (primary_expression
+          (number))))))
+
+================================================================================
+For-in loop
+================================================================================
+
+fn test(): void =>
+    for item in items =>
+        print(item)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    return_type: (type
+      (primitive_type))
+    body: (block
+      (for_in_statement
+        variable: (identifier)
+        iterable: (primary_expression
+          (identifier))
+        body: (block
+          (expression_statement
+            (call_expression
+              function: (primary_expression
+                (identifier))
+              (primary_expression
+                (identifier)))))))))
+
+================================================================================
+While loop
+================================================================================
+
+fn test(): void =>
+    while running =>
+        process()
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    return_type: (type
+      (primitive_type))
+    body: (block
+      (while_statement
+        condition: (primary_expression
+          (identifier))
+        body: (block
+          (expression_statement
+            (call_expression
+              function: (primary_expression
+                (identifier)))))))))
+
+================================================================================
+Return statement
+================================================================================
+
+fn test(): int =>
+    return 42
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    return_type: (type
+      (primitive_type))
+    body: (block
+      (return_statement
+        value: (primary_expression
+          (number))))))

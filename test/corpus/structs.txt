@@ -1,0 +1,168 @@
+================================================================================
+Struct with fields only
+================================================================================
+
+struct Point =>
+    x: double
+    y: double
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (struct_declaration
+    name: (type_identifier)
+    body: (struct_body
+      (field_declaration
+        name: (identifier)
+        type: (type
+          (primitive_type)))
+      (field_declaration
+        name: (identifier)
+        type: (type
+          (primitive_type))))))
+
+================================================================================
+Struct with instance method
+================================================================================
+
+struct Counter =>
+    value: int
+
+    fn increment(): void =>
+        self.value = self.value + 1
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (struct_declaration
+    name: (type_identifier)
+    body: (struct_body
+      (field_declaration
+        name: (identifier)
+        type: (type
+          (primitive_type)))
+      (function_declaration
+        name: (identifier)
+        parameters: (parameter_list)
+        return_type: (type
+          (primitive_type))
+        body: (block
+          (assignment_statement
+            left: (member_expression
+              object: (primary_expression
+                (self))
+              property: (identifier))
+            right: (binary_expression
+              left: (member_expression
+                object: (primary_expression
+                  (self))
+                property: (identifier))
+              right: (primary_expression
+                (number)))))))))
+
+================================================================================
+Struct with static method
+================================================================================
+
+struct Factory =>
+    static fn create(): Factory =>
+        return Factory {}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (struct_declaration
+    name: (type_identifier)
+    body: (struct_body
+      (static_function_declaration
+        name: (identifier)
+        parameters: (parameter_list)
+        return_type: (type
+          (type_identifier))
+        body: (block
+          (return_statement
+            value: (struct_literal
+              type: (type_identifier))))))))
+
+================================================================================
+Struct with fields and both method types
+================================================================================
+
+struct Person =>
+    name: str
+    age: int
+
+    static fn new(n: str, a: int): Person =>
+        return Person { name: n, age: a }
+
+    fn greet(): str =>
+        return self.name
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (struct_declaration
+    name: (type_identifier)
+    body: (struct_body
+      (field_declaration
+        name: (identifier)
+        type: (type
+          (primitive_type)))
+      (field_declaration
+        name: (identifier)
+        type: (type
+          (primitive_type)))
+      (static_function_declaration
+        name: (identifier)
+        parameters: (parameter_list
+          (parameter
+            name: (identifier)
+            type: (type
+              (primitive_type)))
+          (parameter
+            name: (identifier)
+            type: (type
+              (primitive_type))))
+        return_type: (type
+          (type_identifier))
+        body: (block
+          (return_statement
+            value: (struct_literal
+              type: (type_identifier)
+              (field_initializer
+                name: (identifier)
+                value: (primary_expression
+                  (identifier)))
+              (field_initializer
+                name: (identifier)
+                value: (primary_expression
+                  (identifier)))))))
+      (function_declaration
+        name: (identifier)
+        parameters: (parameter_list)
+        return_type: (type
+          (primitive_type))
+        body: (block
+          (return_statement
+            value: (member_expression
+              object: (primary_expression
+                (self))
+              property: (identifier))))))))
+
+================================================================================
+Native struct
+================================================================================
+
+native struct FileHandle as ref =>
+    handle: int
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (struct_declaration
+    name: (type_identifier)
+    body: (struct_body
+      (field_declaration
+        name: (identifier)
+        type: (type
+          (primitive_type))))))

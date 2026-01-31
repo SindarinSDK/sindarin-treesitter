@@ -1,0 +1,121 @@
+================================================================================
+Simple call expression
+================================================================================
+
+fn test(): void =>
+    print("hello")
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    return_type: (type
+      (primitive_type))
+    body: (block
+      (expression_statement
+        (call_expression
+          function: (primary_expression
+            (identifier))
+          (primary_expression
+            (string)))))))
+
+================================================================================
+Binary expression
+================================================================================
+
+fn test(): int =>
+    return 1 + 2
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    return_type: (type
+      (primitive_type))
+    body: (block
+      (return_statement
+        value: (binary_expression
+          left: (primary_expression
+            (number))
+          right: (primary_expression
+            (number)))))))
+
+================================================================================
+Member expression with self
+================================================================================
+
+fn getX(): double =>
+    return self.x
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    return_type: (type
+      (primitive_type))
+    body: (block
+      (return_statement
+        value: (member_expression
+          object: (primary_expression
+            (self))
+          property: (identifier))))))
+
+================================================================================
+Struct literal
+================================================================================
+
+fn create(): Point =>
+    return Point { x: 1.0, y: 2.0 }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    return_type: (type
+      (type_identifier))
+    body: (block
+      (return_statement
+        value: (struct_literal
+          type: (type_identifier)
+          (field_initializer
+            name: (identifier)
+            value: (primary_expression
+              (number)))
+          (field_initializer
+            name: (identifier)
+            value: (primary_expression
+              (number))))))))
+
+================================================================================
+Interpolated string
+================================================================================
+
+fn test(): void =>
+    print($"x = {x}")
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_declaration
+    name: (identifier)
+    parameters: (parameter_list)
+    return_type: (type
+      (primitive_type))
+    body: (block
+      (expression_statement
+        (call_expression
+          function: (primary_expression
+            (identifier))
+          (primary_expression
+            (interpolated_string
+              (interpolation
+                expression: (primary_expression
+                  (identifier))))))))))
